@@ -5,9 +5,7 @@ export default class Scrapbook {
         this.editando = editando;
     }
 
-    trocarTela(event) {
-        event.preventDefault(); // ??
-    
+    trocarTela() {    
         document.getElementsByClassName('list')[0].classList.toggle('d-none');
         document.getElementsByClassName('register')[0].classList.toggle('d-none');
     
@@ -15,9 +13,7 @@ export default class Scrapbook {
         this.resetarCampos();
     }
     
-    salvar(event) {
-        event.preventDefault(); // ??
-    
+    salvar() {    
         let valido = true;
     
         this.resetarFormulario(this.titulo, this.texto);
@@ -63,8 +59,8 @@ export default class Scrapbook {
         document.getElementsByClassName('row-cards')[0].classList.remove('d-none');
       
         document.getElementsByClassName('row-cards')[0].innerHTML += this.criarCard();
-    
-        this.atribuirEventos();
+        
+        this.atribuirEventos();        
     }
     
     criarCard() {
@@ -94,45 +90,38 @@ export default class Scrapbook {
     
                                     <p class="card-text">${this.texto.value}</p>
     
-                                    <small class="text-muted float-right">Vinicius Trampusch</small>
+                                    <small class="text-muted float-right">Vinicius Santos</small>
                                 </div>
                             </div>
                         </div>`
     }
     
     atribuirEventos() {
-    
-        for (let botao of document.getElementsByClassName('btn-remove')) { 
+        
+        for (let botao of document.getElementsByClassName('btn-remove')) {  
             this.atribuirEventosRemover(botao);
         }
-    
-        for (let botao of document.getElementsByClassName('btn-edit')) { 
-            this.atribuirEventosEditar(botao);
-        }
+        
     }
     
-    atribuirEventosRemover(botao) {   
-    
-            botao.addEventListener('click', function(event) {
-                event.preventDefault(); // ??
-                this.parentNode.parentNode.parentNode.parentNode.remove(); // ??
-                
-                if (document.querySelectorAll('.row-cards .col-3').length === 0) {
-                    document.getElementsByClassName('row-empty')[0].classList.remove('d-none');
-                }            
-            });
-    }
-    
-    atribuirEventosEditar(botao) {
-    
+    atribuirEventosRemover(botao) {        
+        
         botao.addEventListener('click', function(event) {
-            event.preventDefault(); // ??
+            event.preventDefault();
+            this.parentNode.parentNode.parentNode.parentNode.remove();
+                        
+            if (document.querySelectorAll('.row-cards .col-3').length === 0) {
+                document.getElementsByClassName('row-empty')[0].classList.remove('d-none');
+            }            
+        });
+    }
     
-            this.trocarTela(event);
-            this.editando = this.parentNode.parentNode.parentNode.parentNode; // ??
-            this.titulo.value = this.editando.getElementsByClassName('h2')[0].innerHTML.trim();
-            this.texto.value = this.editando.getElementsByClassName('card-text')[0].innerHTML.trim();
-            });
+    atribuirEventosEditar(btnEdit) {
+            
+        this.trocarTela();
+        this.editando = btnEdit;
+        this.titulo.value = this.editando.getElementsByClassName('h2')[0].innerHTML.trim();
+        this.texto.value = this.editando.getElementsByClassName('card-text')[0].innerHTML.trim();        
     }
     
     editar() {
@@ -158,5 +147,3 @@ export default class Scrapbook {
     }
 
 } 
-
-
