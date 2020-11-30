@@ -11,6 +11,7 @@ export default class Scrapbook {
     
         this.resetarFormulario();
         this.resetarCampos();
+        this.editando = null;
     }
     
     salvar() {    
@@ -60,7 +61,7 @@ export default class Scrapbook {
       
         document.getElementsByClassName('row-cards')[0].innerHTML += this.criarCard();
         
-        this.atribuirEventos();        
+        this.atribuirEventos();
     }
     
     criarCard() {

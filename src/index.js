@@ -4,6 +4,7 @@ const scrapbook = new Scrapbook();
 const btnAdd = document.getElementsByClassName('btn-add')[0];
 const btnBack = document.getElementsByClassName('btn-back')[0];
 const btnSave = document.getElementsByClassName('btn')[0];
+const search = document.getElementsByName('search')[0];
 
 btnAdd.addEventListener('click', (event) => {
     event.preventDefault();
@@ -15,6 +16,12 @@ btnBack.addEventListener('click', (event) => {
     event.preventDefault();
 
     scrapbook.trocarTela();
+});
+
+search.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    scrapbook.pesquisar();
 });
 
 btnSave.addEventListener('click', (event) => {
@@ -34,4 +41,4 @@ function atribuirEventos() {
             scrapbook.atribuirEventosEditar(btnEdit);
         });
     };
-}
+};
